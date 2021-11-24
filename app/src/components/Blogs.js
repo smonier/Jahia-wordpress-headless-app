@@ -8,6 +8,8 @@ import {HashRouter, Route} from 'react-router-dom';
 import {gqlConfig_blog} from "./gql.config";
 
 const Blogs = props => {
+    let { profileId, sessionId } = props;
+
     const {loading, error, data} = useQuery(GET_BLOGPOSTS, {
         variables: gqlConfig_blog,
     });
@@ -38,14 +40,16 @@ const Blogs = props => {
         }
     }, [loading, data]);
 
-    if (loading) return <img src={`https://via.placeholder.com/512x256/09f/fff?text=Loading`} alt="loading"/>;
+    if (loading) return <img src={`https://giphy.com/embed/3o7bu3XilJ5BOiSGic`} alt="loading" width="480" height="480"/>;
     if (error) return <p>Error ${error}</p>;
 
     return (
         <Container>
             <HashRouter>
                 <Route exact path="/blog/:blogId" render={() => <BlogDetail />}/>
-                <Route exact path="/" render={() => <BlogList items={blogItems}/>}/>
+                <Route exact path="/" render={() => <BlogList items={blogItems}
+                                                              profileId={profileId}
+                                                              sessionId={sessionId}/>}/>
             </HashRouter>
         </Container>
     );

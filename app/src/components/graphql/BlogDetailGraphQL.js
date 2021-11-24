@@ -13,7 +13,7 @@ export const GET_BLOG_DETAIL = gql`
                 publishedDate: property(name: "jcr:lastModified") {value}
                 publishedBy: property(name: "jcr:lastModifiedBy") {value}
                 tags: property(language: $language, name: "j:tagList") {values}
-                categories: property(language: $language, name: "j:defaultCategory") {values}
+                categories: property(language: $language, name: "j:defaultCategory") {nodes: refNodes {value: displayName}}
                 interests: property(name: "wem:interests") {values}
             }
         }

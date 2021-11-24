@@ -5,7 +5,6 @@ import {GET_BLOG_DETAIL} from "./graphql/BlogDetailGraphQL.js";
 import {useQuery} from "@apollo/client";
 import {useHistory} from "react-router-dom";
 import {gqlConfig_blog} from "./gql.config";
-import Category from "./Category";
 import LocalOfferTwoToneIcon from '@material-ui/icons/LocalOfferTwoTone';
 import CategoryTwoToneIcon from '@material-ui/icons/CategoryTwoTone';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
@@ -67,7 +66,7 @@ const BlogDetail = (props) => {
                 publishedDate: blogNode.publishedDate.value,
                 publishedBy: blogNode.publishedBy.value,
                 blogTags: blogNode.tags && blogNode.tags.values,
-                blogCategories: blogNode.categories && blogNode.categories.values
+                blogCategories: blogNode.categories && blogNode.categories.nodes
             }
             setblog(item);
 
@@ -76,7 +75,7 @@ const BlogDetail = (props) => {
         }
     }, [loading, data]);
 
-    if (loading) return <img src={`https://via.placeholder.com/512x256/09f/fff?text=Loading`} alt="loading"/>;
+    if (loading) return <img src={`https://giphy.com/embed/3o7bu3XilJ5BOiSGic`} alt="loading" width="480" height="480"/>;
     if (error) return <p>Error ${error}</p>;
 
     return (
@@ -97,7 +96,7 @@ const BlogDetail = (props) => {
                         <Grid container>
                             {blog.blogTags && blog.blogTags.map((tag) => {
                                 return (
-                                    <Stack direction="row" spacing={3}>
+                                    <Stack direction="row" spacing={1}>
                                         <Chip icon={<LocalOfferTwoToneIcon/>} label={tag} color="primary"
                                               variant="outlined" size="small"/>
                                     </Stack>
@@ -107,8 +106,8 @@ const BlogDetail = (props) => {
 
                             {blog.blogCategories && blog.blogCategories.map((cat) => {
                                 return (
-                                    <Stack direction="row" spacing={3}>
-                                        <Chip icon={<CategoryTwoToneIcon/>} label={<Category uuid={cat}/>}
+                                    <Stack direction="row" spacing={1}>
+                                        <Chip icon={<CategoryTwoToneIcon/>} label={cat.value}
                                               color="success" variant="outlined" size="small">
 
                                         </Chip>

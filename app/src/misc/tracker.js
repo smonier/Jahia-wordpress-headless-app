@@ -19,6 +19,14 @@ const syncPageView = ({blogNode, scope}) => {
     const tags = blogNode && blogNode.tags ? blogNode.tags.values : null;
     const interestsArray =
         blogNode && blogNode.interests ? blogNode.interests.values : null;
+    const categoriesArray = blogNode && blogNode.categories ? blogNode.categories.nodes : null;
+
+    const categories = [];
+    if (categoriesArray) {
+        categoriesArray.forEach(category => {
+            categories.push(category.value);
+        })
+    }
 
     const interests = {};
     if (interestsArray) {
@@ -35,7 +43,8 @@ const syncPageView = ({blogNode, scope}) => {
         pageInfo: {
             pageName: blogNode.title,
             destinationURL: window.location.href,
-            tags: tags
+            tags: tags,
+            categories: categories
         },
         interests: interests
     };

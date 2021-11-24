@@ -6,7 +6,7 @@ import {gqlConfig_blog} from "./gql.config";
 import uTracker from "unomi-analytics";
 
 //Init unomi tracker
-if(gqlConfig_blog.workspace === "LIVE")
+if (gqlConfig_blog.workspace === "LIVE")
     syncTracker({
         scope: gqlConfig_blog.scope,
         url: gqlConfig_blog.cdp_endpoint,
@@ -14,6 +14,7 @@ if(gqlConfig_blog.workspace === "LIVE")
     });
 
 class App extends Component {
+
     state = {
         tagList: ["tags"],
         profileId: null,
@@ -37,12 +38,18 @@ class App extends Component {
             });
         });
     }
+
     handleChange(e) {
         console.log(e.target.value)
     }
 
     render() {
-        return <Blogs />;
+        const { profileId, sessionId } = this.state;
+
+        return <Blogs
+            profileId={profileId}
+            sessionId={sessionId}
+        />;
     }
 }
 
