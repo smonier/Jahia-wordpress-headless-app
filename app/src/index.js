@@ -19,9 +19,13 @@ const httpLink = createHttpLink({
 });
 
 // 3
+const JWTDXToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJodHRwOi8vamFoaWEuY29tIiwic3ViIjoiYXBpIHZlcmlmaWNhdGlvbiIsInJlZmVyZXIiOlsiaHR0cDovL3dvcmRwcmVzcy5sb2NhbCJdLCJpc3MiOiJkeCIsInNjb3BlcyI6WyJ3b3JkcHJlc3MiXSwiaWF0IjoxNjQ0MjQyNjY2LCJpcHMiOlsiMTI3LjAuMC4xIl0sImp0aSI6ImYyNTRkOWMzLTEwNDktNDQxOC04NDkwLWU4ZTQ3MDMzYzMzNyJ9.s933JfsPUSm3gYFDUCRiyJoK9V5SyMCKjmjx3R8fZQU";
 const client = new ApolloClient({
     link: httpLink,
-    cache: new InMemoryCache()
+    cache: new InMemoryCache(),
+    headers: {
+        'Authorization': `Bearer ${JWTDXToken}`
+    }
 });
 
 

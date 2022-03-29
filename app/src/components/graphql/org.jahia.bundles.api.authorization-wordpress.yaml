@@ -1,0 +1,12 @@
+---
+wordpress:
+  auto_apply:
+    - origin: "http://wordpress.local"
+    - origin: "http://localhost:3000"
+  grants:
+    - api:
+        include: "graphql"
+   #     node:
+  #        pathPattern: "jcr,/,/sites/[^/]+/.*"
+       #   nodeType: "jcnt:blogEntry,jnt:news"
+  description: "Yoda Wordpress"

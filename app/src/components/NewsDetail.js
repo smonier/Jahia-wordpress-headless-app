@@ -4,7 +4,7 @@ import {useParams} from 'react-router-dom';
 import {GET_NEWS_DETAIL} from "./graphql/NewsDetailGraphQL.js";
 import {useQuery} from "@apollo/client";
 import {useHistory} from "react-router-dom";
-import {gqlConfig} from "./gql.config";
+import {gqlConfig, gqlConfig_blog} from "./gql.config";
 import Media from "./Media";
 import Category from "./Category";
 import List from '@material-ui/core/List';
@@ -15,6 +15,7 @@ import LocalOfferTwoToneIcon from '@material-ui/icons/LocalOfferTwoTone';
 import CategoryTwoToneIcon from '@material-ui/icons/CategoryTwoTone';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import EventIcon from '@material-ui/icons/Event';
+import {syncNewsPageView} from "../misc/tracker";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -55,6 +56,8 @@ const NewsDetail = (props) => {
 
     React.useEffect(() => {
         if (loading === false && data) {
+            const scope = gqlConfig.scope;
+
             const newsNode = data.response.news;
             let item = [];
             item = {
@@ -72,6 +75,8 @@ const NewsDetail = (props) => {
                 newsCategories: newsNode.categories && newsNode.categories.values
             }
             setNews(item);
+            syncNewsPageView({newsNode,scope});
+
         }
     }, [loading, data]);
 

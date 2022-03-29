@@ -23,6 +23,16 @@ export const GET_NEWS = gql`
                         interests: property(name: "wem:interests") {
                             values
                         }
+                        SitesIn: property(name: "sxo:siteInSelector") {
+                            nodes: refNodes {
+                                value: displayName
+                            }
+                        }
+                        SitesOut: property(name: "sxo:siteOutSelector") {
+                            nodes: refNodes {
+                                value: displayName
+                            }
+                        }
                     }
                 }
             }

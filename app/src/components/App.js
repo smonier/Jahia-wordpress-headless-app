@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {syncTracker} from "../misc/tracker";
 
 import Blogs from './Blogs';
+import News from './News'
 import {gqlConfig_blog} from "./gql.config";
 import uTracker from "unomi-analytics";
 
@@ -46,10 +47,15 @@ class App extends Component {
     render() {
         const { profileId, sessionId } = this.state;
 
-        return <Blogs
-            profileId={profileId}
-            sessionId={sessionId}
-        />;
+        /*      return <Blogs
+                 profileId={profileId}
+                 sessionId={sessionId}
+             />;*/
+               return <News
+                    profileId={profileId}
+                    sessionId={sessionId}
+                />
+        ;
     }
 }
 

@@ -1,8 +1,9 @@
 const gqlConfig = {
-    "scope": process.env.REACT_APP_JCONTENT_SITE,
     "language": process.env.REACT_APP_JCONTENT_LANGUAGE,
     "workspace": "LIVE",
-    "path": process.env.REACT_APP_JCONTENT_PATH
+    "path": process.env.REACT_APP_JCONTENT_PATH,
+    "scope":  "yoda"
+
 }
 const gqlConfig_blog = {
     "scope":  "www",
@@ -10,7 +11,7 @@ const gqlConfig_blog = {
     "workspace": "LIVE",
     "path": process.env.REACT_APP_JCONTENT_BLOGPATH,
     "cdp_endpoint": process.env.REACT_APP_JCUSTOMER_ENDPOINT,
-    "persoId": "1af5cff1-e0aa-43b5-9f16-16b2532fb46b"
+    "persoId": "5cce4430-962b-4336-a1d9-59e52d5893e2"
 }
 
 export {gqlConfig,gqlConfig_blog}

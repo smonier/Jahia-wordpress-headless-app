@@ -51,6 +51,42 @@ const syncPageView = ({blogNode, scope}) => {
     uTracker.page(properties);
 };
 
+const syncNewsPageView = ({newsNode, scope}) => {
+
+    const tags = newsNode && newsNode.tags ? newsNode.tags.values : null;
+    const interestsArray =
+        newsNode && newsNode.interests ? newsNode.interests.values : null;
+    const categoriesArray = newsNode && newsNode.categories ? newsNode.categories.nodes : null;
+
+    const categories = [];
+    if (categoriesArray) {
+        categoriesArray.forEach(category => {
+            categories.push(category.value);
+        })
+    }
+
+    const interests = {};
+    if (interestsArray) {
+        interestsArray.forEach(interest => {
+            const interestNameValue = interest.split(":");
+            const key = interestNameValue[0];
+            const value = parseInt(interestNameValue[1]);
+            interests[key] = value;
+        });
+    }
+    const properties = {
+        path: window.location.href,
+        scope: scope,
+        pageInfo: {
+            pageName: newsNode.title,
+            destinationURL: window.location.href,
+            tags: tags,
+            categories: categories
+        },
+        interests: interests
+    };
+    uTracker.page(properties);
+};
 const syncConsentStatus = ({typeIdentifier, scope, status}) => {
     const statusDate = new Date();
     const revokeDate = new Date(statusDate);
@@ -112,5 +148,6 @@ export {
     syncQuizScore,
     syncVideoStatus,
     syncVisitorData,
-    syncPageView
+    syncPageView,
+    syncNewsPageView
 }

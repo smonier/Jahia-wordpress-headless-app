@@ -20,6 +20,8 @@ const useStyles = makeStyles((theme) => ({
 
 
 const NewsList = props => {
+    let {profileId, sessionId} = props;
+
     const classes = useStyles();
     const [tagSelected, setSelectedTag] = React.useState('');
 
@@ -27,11 +29,11 @@ const NewsList = props => {
         setSelectedTag(event.target.value);
     };
     console.log(props.items);
-    const tagList = [];
+    const filterList = [];
 
     props.items.map((item) => (
-        item.newsTags && item.newsTags.map((tag) => {
-            tagList.indexOf(tag) === -1 ? tagList.push(tag) : console.log("This item already exists");
+        item.sites && item.sites.map((tag) => {
+            filterList.indexOf(tag.value) === -1 ? filterList.push(tag.value) : console.log("This item already exists");
         })))
 
     return (
@@ -51,19 +53,21 @@ const NewsList = props => {
                             <MenuItem value="All">
                                 <em>All</em>
                             </MenuItem>
-                            {tagList.map(tag => {
-                                return ( <MenuItem value={tag}>{tag}</MenuItem> )
+                            {filterList.map(tag => {
+                                return (<MenuItem value={tag}>{tag}</MenuItem>)
                             })}
                         </Select>
                     </FormControl>
                 </Grid>
             </Grid>
-            {props.items.filter(news => ((tagSelected && tagSelected !== "All") ? (news.newsTags.indexOf(tagSelected) >= 0) : (news.id !== null))).map((item) => (
-                <Grid
-                    item sm={12} md={3}
-                    key={item.id}>
-                    <NewsItem item={item}/>
-                </Grid>
+            {props.items.filter(news => ((tagSelected && tagSelected !== "All") ? (news.sites == null || (news.sites && Object.values(news.sites).indexOf(tagSelected) >= 0)) : (news.id !== null))).map((item) => (
+                    <Grid
+                        item sm={12} md={3}
+                        key={item.id}>
+                        <NewsItem item={item}
+                                  profileId={profileId}
+                                  sessionId={sessionId}/>
+                    </Grid>
             ))}
         </Grid>
     )

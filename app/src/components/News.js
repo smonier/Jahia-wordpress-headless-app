@@ -8,6 +8,8 @@ import {HashRouter, Route} from 'react-router-dom';
 import {gqlConfig} from "./gql.config";
 
 const News = props => {
+    let { profileId, sessionId } = props;
+
     const {loading, error, data} = useQuery(GET_NEWS, {
         variables: gqlConfig,
     });
@@ -19,6 +21,7 @@ const News = props => {
         let items = [];
         if (loading === false && data) {
             data.response.newsList.children.nodes.forEach(node => {
+
                 items.push({
                         id: node.uuid,
                         title: node.title,
@@ -26,9 +29,11 @@ const News = props => {
                         image: process.env.REACT_APP_JCONTENT_FILES_ENDPOINT + `${node.image.refNode.path}`,
                         created: node.created.value,
                         newsTags: node.tags && node.tags.values,
-                        newsCategories: node.categories && node.categories.values
+                        newsCategories: node.categories && node.categories.values,
+                        sites: node.SitesIn && Object.values(node.SitesIn.nodes)
                     }
                 );
+
 
             })
             setNewsItems(items);
@@ -43,7 +48,10 @@ const News = props => {
         <Container>
             <HashRouter>
                 <Route exact path="/news/:newsId" render={() => <NewsDetail/>}/>
-                <Route exact path="/" render={() => <NewsList items={newsItems}/>}/>
+                <Route exact path="/" render={() => <NewsList items={newsItems}
+                                                              profileId={profileId}
+                                                              sessionId={sessionId}
+                />}/>
             </HashRouter>
         </Container>
     );
