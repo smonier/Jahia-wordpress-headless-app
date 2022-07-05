@@ -111,7 +111,7 @@ const NewsDetail = (props) => {
                                         <List>
                                             {news.newsTags && news.newsTags.map((tag) => {
                                                 return (
-                                                    <ListItem>
+                                                    <ListItem key={tag}>
                                                         <ListItemIcon>
                                                             <LocalOfferTwoToneIcon/>
                                                         </ListItemIcon>

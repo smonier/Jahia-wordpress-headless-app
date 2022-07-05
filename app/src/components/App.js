@@ -47,16 +47,16 @@ class App extends Component {
     render() {
         const { profileId, sessionId } = this.state;
 
-        /*      return <Blogs
+              return <Blogs
                  profileId={profileId}
                  sessionId={sessionId}
-             />;*/
-               return <News
-                    profileId={profileId}
-                    sessionId={sessionId}
-                />
-        ;
-    }
+             />;
+/*return <News
+      profileId={profileId}
+      sessionId={sessionId}
+  />*/
+;
+}
 }
 
 export default App;

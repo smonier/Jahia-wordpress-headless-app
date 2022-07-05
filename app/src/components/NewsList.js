@@ -33,11 +33,9 @@ const NewsList = props => {
 
     props.items.map((item) => (
         item.sites && item.sites.map((tag) => {
-            filterList.indexOf(tag.value) === -1 ? filterList.push(tag.value) : console.log("This item already exists");
+            filterList.indexOf(tag) === -1 ? filterList.push(tag) : console.log("This item already exists");
         })))
-
     return (
-
         <Grid container spacing={2}>
             <Grid container spacing={3}>
 
@@ -54,13 +52,14 @@ const NewsList = props => {
                                 <em>All</em>
                             </MenuItem>
                             {filterList.map(tag => {
-                                return (<MenuItem value={tag}>{tag}</MenuItem>)
+                                return (<MenuItem key={tag} value={tag}>{tag}</MenuItem>)
                             })}
                         </Select>
                     </FormControl>
                 </Grid>
             </Grid>
-            {props.items.filter(news => ((tagSelected && tagSelected !== "All") ? (news.sites == null || (news.sites && Object.values(news.sites).indexOf(tagSelected) >= 0)) : (news.id !== null))).map((item) => (
+            {props.items.filter(news => ((tagSelected && tagSelected !== "All") ? (news.sites == null || news.sites.includes(tagSelected) ) : (news.id !== null))).map((item) => {
+                return (
                     <Grid
                         item sm={12} md={3}
                         key={item.id}>
@@ -68,7 +67,9 @@ const NewsList = props => {
                                   profileId={profileId}
                                   sessionId={sessionId}/>
                     </Grid>
-            ))}
+                )
+            })}
+
         </Grid>
     )
 

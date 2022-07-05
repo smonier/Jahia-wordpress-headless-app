@@ -60,8 +60,8 @@ const BlogList = props => {
                             <MenuItem value="All">
                                 <em>All</em>
                             </MenuItem>
-                            {tagList.map(tag => {
-                                return ( <MenuItem value={tag}>{tag}</MenuItem> )
+                            {tagList && tagList.map(tag => {
+                                return ( <MenuItem key={tag} value={tag}>{tag}</MenuItem> )
                             })}
                         </Select>
                     </FormControl>

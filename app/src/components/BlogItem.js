@@ -33,7 +33,7 @@ const BlogItem = props => {
                         <Typography variant="body2" color="textSecondary" component="p">
                             {new Date(Blog.date).toLocaleDateString("en-US")}
 
-                            <div dangerouslySetInnerHTML={{__html: Blog.summary && Blog.summary.substring(0, 100) + " ..."}}></div>
+                            <span dangerouslySetInnerHTML={{__html: Blog.summary && Blog.summary.substring(0, 100) + " ..."}}></span>
                         </Typography>
 
                     </CardContent>

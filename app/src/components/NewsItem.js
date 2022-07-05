@@ -30,7 +30,7 @@ const NewsItem = props => {
                         <Typography className={classes.title}>
                             {news.title}
                         </Typography>
-                        <Typography variant="body2" color="textSecondary" component="p">
+                        <Typography variant="body2" color="textSecondary" component="div">
                             <div dangerouslySetInnerHTML={{__html: news.description.substring(0, 100) + " ..."}}></div>
                         </Typography>
 
@@ -45,7 +45,7 @@ const NewsItem = props => {
                                 <Typography variant="body1" color="textSecondary" component="p">
                                             {news.newsTags && news.newsTags.map((tag) => {
                                                 return (
-                                                    <span> <LocalOfferTwoToneIcon/> {tag}</span>
+                                                    <span key={tag}> <LocalOfferTwoToneIcon/> {tag}</span>
                                                 );
 
                                             })

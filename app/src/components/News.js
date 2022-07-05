@@ -26,11 +26,11 @@ const News = props => {
                         id: node.uuid,
                         title: node.title,
                         description: node.description.value,
-                        image: process.env.REACT_APP_JCONTENT_FILES_ENDPOINT + `${node.image.refNode.path}`,
+                        image: process.env.REACT_APP_JCONTENT_FILES_ENDPOINT + `${node.image?.refNode?.path}`,
                         created: node.created.value,
                         newsTags: node.tags && node.tags.values,
                         newsCategories: node.categories && node.categories.values,
-                        sites: node.SitesIn && Object.values(node.SitesIn.nodes)
+                        sites: node.SitesIn?.nodes?.map(site => (site.value))
                     }
                 );
 
@@ -42,7 +42,7 @@ const News = props => {
     }, [loading, data]);
 
     if (loading) return <img src={`https://via.placeholder.com/512x256/09f/fff?text=Loading`} alt="loading"/>;
-    if (error) return <p>Error ${error}</p>;
+    if (error) return <p>Error {error}</p>;
 
     return (
         <Container>
